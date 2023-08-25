@@ -22,7 +22,7 @@ const getUserById = (req, res) => {
         return res.status(404).send({ message: `Пользователь с таким id не найден: ${userId}` });
       }
       if (err instanceof mongoose.Error.CastError) {
-        return res.status(400).send({ message: `Некорректный id: ${userId}` });
+        return res.status(404).send({ message: `Некорректный id: ${userId}` });
       }
       return res.status(500).send({ message: `Внутренняя ошибка сервера: ${err.name}` });
     });
