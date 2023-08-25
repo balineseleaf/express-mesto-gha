@@ -54,14 +54,15 @@ const putLikes = (req, res) => {
       { $addToSet: { likes: req.user._id } },
       { new: true },
     )
-    .then((response) => res.send(response))
+    .orFail()
+    .then((response) => res.status(200).send(response))
     .catch((err) => {
       console.log(mongoose.Error);
       if (err instanceof mongoose.Error.CastError) {
         return res.status(400).send({ message: `Несуществующий id: ${cardId}` });
       }
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        return res.status(404).send({ message: `Карточка с таким id не существует: ${cardId}` });
+        return res.status(404).send({ message: `Карточка c таким id не существует: ${cardId}` });
       }
       return res.status(500).send({ message: `Внутренняя ошибка сервера: ${err.name}` });
     });
@@ -75,11 +76,12 @@ const deleteLikes = (req, res) => {
       { $pull: { likes: req.user._id } },
       { new: true },
     )
-    .then((response) => res.send(response))
+    .orFail()
+    .then((response) => res.status(200).send(response))
     .catch((err) => {
       console.log(mongoose.Error);
       if (err instanceof mongoose.Error.CastError) {
-        return res.status(400).send({ message: `Несуществующий id: ${cardId}` });
+        return res.status(404).send({ message: `Несуществующий id: ${cardId}` });
       }
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
         return res.status(404).send({ message: `Карточка с таким id не существует: ${cardId}` });
