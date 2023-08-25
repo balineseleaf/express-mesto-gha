@@ -18,11 +18,11 @@ const getUserById = (req, res) => {
   return userSchema.findById(userId)
     .then((response) => res.status(200).send(response)).catch((err) => {
       console.log(err.name);
-      if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        return res.status(404).send({ message: `Пользователь с таким id не найден: ${userId}` });
-      }
       if (err instanceof mongoose.Error.CastError) {
-        return res.status(400).send({ message: `Некорректный id: ${userId}` });
+        return res.status(400).send({ message: `Несуществующий id: ${userId}` });
+      }
+      if (err instanceof mongoose.Error.DocumentNotFoundError) {
+        return res.status(404).send({ message: `Пользователя с таким id нет: ${userId}` });
       }
       return res.status(500).send({ message: `Внутренняя ошибка сервера: ${err.name}` });
     });
