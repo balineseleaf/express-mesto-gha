@@ -58,7 +58,7 @@ const putLikes = (req, res) => {
     .catch((err) => {
       console.log(mongoose.Error);
       if (err instanceof mongoose.Error.CastError) {
-        return res.status(404).send({ message: `Несуществующий id: ${cardId}` });
+        return res.status(400).send({ message: `Несуществующий id: ${cardId}` });
       }
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
         return res.status(404).send({ message: `Карточка с таким id не существует: ${cardId}` });
@@ -79,7 +79,7 @@ const deleteLikes = (req, res) => {
     .catch((err) => {
       console.log(mongoose.Error);
       if (err instanceof mongoose.Error.CastError) {
-        return res.status(404).send({ message: `Несуществующий id: ${cardId}` });
+        return res.status(400).send({ message: `Несуществующий id: ${cardId}` });
       }
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
         return res.status(404).send({ message: `Карточка с таким id не существует: ${cardId}` });
