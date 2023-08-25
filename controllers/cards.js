@@ -53,8 +53,8 @@ const putLikes = (req, res) => {
       req.params.cardId,
       { $addToSet: { likes: req.user._id } },
       { new: true },
-    ).orFail()
-    .then((response) => res.status(200).send(response))
+    )
+    .then((response) => res.send(response))
     .catch((err) => {
       console.log(mongoose.Error);
       if (err instanceof mongoose.Error.CastError) {
@@ -75,8 +75,7 @@ const deleteLikes = (req, res) => {
       { $pull: { likes: req.user._id } },
       { new: true },
     )
-    .orFail()
-    .then((response) => res.status(200).send(response))
+    .then((response) => res.send(response))
     .catch((err) => {
       console.log(mongoose.Error);
       if (err instanceof mongoose.Error.CastError) {
