@@ -61,7 +61,7 @@ const putLikes = (req, res) => {
         return res.status(404).send({ message: `Некорректный id: ${cardId}` });
       }
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        return res.status(400).send({ message: `Карточка с указанным id не найдена: ${cardId}` });
+        return res.status(404).send({ message: `Карточка с указанным id не найдена: ${cardId}` });
       }
       return res.status(500).send({ message: `Внутренняя ошибка сервера: ${err.name}` });
     });
@@ -82,7 +82,7 @@ const deleteLikes = (req, res) => {
         return res.status(404).send({ message: `Некорректный id: ${cardId}` });
       }
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        return res.status(400).send({ message: `Карточка с указанным id не найдена: ${cardId}` });
+        return res.status(404).send({ message: `Карточка с указанным id не найдена: ${cardId}` });
       }
       return res.status(500).send({ message: `Внутренняя ошибка сервера: ${err.name}` });
     });
