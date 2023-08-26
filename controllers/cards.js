@@ -32,6 +32,7 @@ const createCards = (req, res) => {
 const deleteCardById = (req, res) => {
   const { cardId } = req.params;
   return cardSchema.findByIdAndRemove(cardId)
+    .orFail()
     .then((response) => res.status(200).send(response))
     .catch((err) => {
       console.log(err.name);
