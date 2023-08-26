@@ -32,7 +32,7 @@ const getUserById = (req, res) => {
 const postUser = (req, res) => {
   const { name, about, avatar } = req.body;
   return userSchema.create({ name, about, avatar })
-    .then((response) => { res.status(200).send(response); })
+    .then((response) => { res.status(201).send(response); })
     .catch((err) => {
       console.log(err.name);
       if (err instanceof mongoose.Error.ValidationError) {
