@@ -13,7 +13,7 @@ const getCards = (req, res) => {
 };
 
 // создаем карточку
-const createCards = (req, res) => {
+const createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
   return cardSchema
@@ -93,7 +93,7 @@ const deleteLikes = (req, res) => {
 
 module.exports = {
   getCards,
-  createCards,
+  createCard,
   putLikes,
   deleteLikes,
   deleteCardById,

@@ -2,14 +2,14 @@ const cardRoutes = require('express').Router(); // настраиваем роу
 
 const {
   getCards,
-  createCards,
+  createCard,
   deleteCardById,
   putLikes,
   deleteLikes,
 } = require('../controllers/cards');
 
 cardRoutes.get('/', getCards);
-cardRoutes.post('/', createCards);
+cardRoutes.post('/', createCard);
 cardRoutes.delete('/:cardId', deleteCardById);
 cardRoutes.put('/:cardId/likes', putLikes);
 cardRoutes.delete('/:cardId/likes', deleteLikes);
