@@ -16,6 +16,7 @@ const getUsers = (req, res) => {
 const getUserById = (req, res) => {
   const { userId } = req.params;
   return userSchema.findById(userId)
+    .orFail()
     .then((response) => res.status(200).send(response)).catch((err) => {
       console.log(err.name);
       if (err instanceof mongoose.Error.CastError) {
