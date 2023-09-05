@@ -2,11 +2,11 @@ const userRoutes = require('express').Router(); // создаёт объект, 
 const { celebrate, Joi } = require('celebrate');
 
 const {
-  postUser, getUsers, getUserById, updateUser, updateAvatar,
+  getUsers, getUserById, updateUser, updateAvatar, getUser,
 } = require('../controllers/users'); // импортируем методы
 
 userRoutes.get('/', getUsers); // записываем их роуты
-userRoutes.post('/', postUser);
+userRoutes.get('/me', getUser);
 
 userRoutes.get('/:userId', celebrate({
   params: Joi.object().keys({ // Такое описание говорит, что body должно быть объектом с ключами:
