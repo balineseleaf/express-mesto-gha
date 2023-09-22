@@ -3,12 +3,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userSchema = require('../models/user');
 
+const { NODE_ENV, JWT } = process.env;
+
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 const NotFoundError = require('../errors/NotFoundError');
 
-const { JWT = 'secretCode' } = process.env;
 // находим себя
 const getUser = (req, res, next) => {
   const { _id } = req.user;
@@ -120,7 +121,7 @@ const login = (req, res, next) => {
       }
       return bcrypt.compare(password, user.password, (error, isValid) => { // нашёлся—сравниваемхеши
         if (isValid) {
-          const token = jwt.sign({ _id: user._id }, JWT); // Вызовем метод jwt.sign,
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT : 'dev-secret', { expiresIn: '7d' }); // Вызовем метод jwt.sign,
           // чтобы создать токен
           // Методу sign мы передали два аргумента:
           // пейлоуд токена и секретный ключ подписи:

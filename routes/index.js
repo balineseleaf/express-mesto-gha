@@ -9,6 +9,12 @@ const { login, postUser } = require('../controllers/users'); // забираем
 router.use('/users', auth, usersRouter); // добавл мидлвеир авторизации
 router.use('/cards', auth, cardsRouter); // добавл мидлвеир авторизации
 
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.post('/signin', celebrate({ // роуты, не требующие авторизации,
   body: Joi.object().keys({
     email: Joi.string().email().required(),

@@ -9,7 +9,7 @@ const {
   deleteLikes,
 } = require('../controllers/cards');
 
-cardRoutes.get('/', getCards);
+cardRoutes.get('/', getCards); // регаем по такому-то роуту - такой-то обработчик
 
 cardRoutes.post('/', celebrate({ // Такое описание говорит, что body должно быть объектом с ключами:
   body: Joi.object().keys({

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { JWT = 'secretCode' } = process.env;
+const { NODE_ENV, JWT } = process.env;
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
 function auth(req, res, next) {
@@ -14,7 +14,7 @@ function auth(req, res, next) {
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT); // После извле ток из запроса нужно убед,
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT : 'dev-secret'); // После извле ток из запроса нужно убед,
   } catch (err) { // что польз прислал тот токен, кот был выдан ему ранее,кот был выдан ранее.
     // Такую проверку осуществляет метод verify модуля jsonwebtoken. Метод принимает на вход два
     // параметра —
